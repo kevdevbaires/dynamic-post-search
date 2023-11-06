@@ -2,19 +2,16 @@ import {useSelect} from '@wordpress/data'
 import {__} from '@wordpress/i18n'
 import {useBlockProps} from '@wordpress/block-editor'
 import {SearchControl, Popover} from '@wordpress/components'
-import {useState, useCallback} from '@wordpress/element';
+import {useState} from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
-import { debounce } from 'lodash';
 
 
 import './editor.scss'
 
 export default function Edit({ attributes, setAttributes}) {
-
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isPopoverVisible, setIsPopoverVisible] = useState(false);
-    const [posts, setPosts] = useState([]);
 
     const postTypes = useSelect(select => {
         const { getPostTypes } = select('core');
@@ -39,22 +36,16 @@ export default function Edit({ attributes, setAttributes}) {
     };
 
     const onClickPostResult = (post) => {
-        let addedPosts = [...posts, post]
-        setPosts(addedPosts)
+        let addedPosts = [...attributes.posts, post]
         setIsPopoverVisible(false)
         setSearchValue('')
 
         setAttributes({posts: addedPosts})
-
-        console.log('attributes', attributes)
     }
 
     const onClickRemovePost = (postToRemove) => {
-        const filteredPosts = posts.filter((post) => postToRemove.id !== post.id);
-        setPosts(filteredPosts);
+        const filteredPosts = attributes.posts.filter((post) => postToRemove.id !== post.id);
         setAttributes({posts: filteredPosts})
-
-        console.log('attributes', attributes)
     }
 
 	return (
@@ -97,7 +88,7 @@ export default function Edit({ attributes, setAttributes}) {
                 </div>
             }
             <ul className="posts-list">
-                { posts && posts.map((post) => {
+                { attributes.posts && attributes.posts.map((post) => {
                     return (
                         <li className="posts-list-item" key={ post.id }>
                             <div className="posts-list-link">

@@ -26,10 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
-
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 
 
 
@@ -45,7 +42,6 @@ function Edit({
   const [searchValue, setSearchValue] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)('');
   const [searchResults, setSearchResults] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
   const [isPopoverVisible, setIsPopoverVisible] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
-  const [posts, setPosts] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
   const postTypes = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(select => {
     const {
       getPostTypes
@@ -73,22 +69,18 @@ function Edit({
     setIsPopoverVisible(true);
   };
   const onClickPostResult = post => {
-    let addedPosts = [...posts, post];
-    setPosts(addedPosts);
+    let addedPosts = [...attributes.posts, post];
     setIsPopoverVisible(false);
     setSearchValue('');
     setAttributes({
       posts: addedPosts
     });
-    console.log('attributes', attributes);
   };
   const onClickRemovePost = postToRemove => {
-    const filteredPosts = posts.filter(post => postToRemove.id !== post.id);
-    setPosts(filteredPosts);
+    const filteredPosts = attributes.posts.filter(post => postToRemove.id !== post.id);
     setAttributes({
       posts: filteredPosts
     });
-    console.log('attributes', attributes);
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)()
@@ -118,7 +110,7 @@ function Edit({
     }, post.link)));
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", {
     className: "posts-list"
-  }, posts && posts.map(post => {
+  }, attributes.posts && attributes.posts.map(post => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
       className: "posts-list-item",
       key: post.id
@@ -213,16 +205,6 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module) {
 
 module.exports = window["React"];
-
-/***/ }),
-
-/***/ "lodash":
-/*!*************************!*\
-  !*** external "lodash" ***!
-  \*************************/
-/***/ (function(module) {
-
-module.exports = window["lodash"];
 
 /***/ }),
 
