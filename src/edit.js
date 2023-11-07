@@ -92,7 +92,7 @@ export default function Edit({ attributes, setAttributes}) {
                     return (
                         <li className="posts-list-item" key={ post.id }>
                             <div className="posts-list-link">
-                                <a href={ post.link }>
+                                <a href={ post.link } target="_blank">
                                     {
                                         post.title.rendered ?
                                             post.title.rendered :

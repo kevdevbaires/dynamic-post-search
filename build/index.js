@@ -117,7 +117,8 @@ function Edit({
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "posts-list-link"
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: post.link
+      href: post.link,
+      target: "_blank"
     }, post.title.rendered ? post.title.rendered : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Default title', 'author-plugin')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, post.link)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       onClick: () => onClickRemovePost(post)
     }, "Clear"));
