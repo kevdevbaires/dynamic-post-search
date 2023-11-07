@@ -19,7 +19,8 @@
 	"viewScript": "file:./view.js",
   "attributes": {
     "posts": {
-      "type": "array"
+      "type": "array",
+      "default": []
     }
   }
 }

@@ -9,6 +9,8 @@ import apiFetch from '@wordpress/api-fetch';
 import './editor.scss'
 
 export default function Edit({ attributes, setAttributes}) {
+    const { posts } = attributes
+
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isPopoverVisible, setIsPopoverVisible] = useState(false);
@@ -36,7 +38,7 @@ export default function Edit({ attributes, setAttributes}) {
     };
 
     const onClickPostResult = (post) => {
-        let addedPosts = [...attributes.posts, post]
+        let addedPosts = [...posts, post]
         setIsPopoverVisible(false)
         setSearchValue('')
 
@@ -44,7 +46,7 @@ export default function Edit({ attributes, setAttributes}) {
     }
 
     const onClickRemovePost = (postToRemove) => {
-        const filteredPosts = attributes.posts.filter((post) => postToRemove.id !== post.id);
+        const filteredPosts = posts.filter((post) => postToRemove.id !== post.id);
         setAttributes({posts: filteredPosts})
     }
 
@@ -88,7 +90,7 @@ export default function Edit({ attributes, setAttributes}) {
                 </div>
             }
             <ul className="posts-list">
-                { attributes.posts && attributes.posts.map((post) => {
+                { posts && posts.map((post) => {
                     return (
                         <li className="posts-list-item" key={ post.id }>
                             <div className="posts-list-link">
